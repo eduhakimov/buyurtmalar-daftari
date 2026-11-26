@@ -1,0 +1,21 @@
+/* Buyurtmalar daftari: iliq qog'oz tonlari, buxgalteriya jadvali */
+* { font-size: 10.5pt; }
+QFrame#Kpi { background: {surface}; border: 1px solid {border}; border-left: 4px solid {accent}; border-radius: 4px; }
+QLabel#KpiTitle { color: {muted}; font-size: 9pt; }
+QLabel#KpiValue { font-size: 15pt; font-weight: 700; }
+QLabel#KpiValue[hot="true"] { color: #dc2626; }
+QFrame#SidePanel { background: {surface}; border: 1px solid {border}; border-radius: 4px; }
+QLabel#PanelHeading { font-size: 12.5pt; font-weight: 700; }
+QLabel#IdBadge { color: {muted}; font-family: "Consolas"; font-size: 10pt; }
+QLabel#Summary { background: {surface2}; border-radius: 3px; padding: 6px 8px; }
+QTabBar#ViewTabs::tab { background: transparent; border: none; border-bottom: 3px solid transparent;
+    padding: 6px 4px; margin-right: 22px; color: {muted}; font-size: 12pt; font-weight: 600; }
+QTabBar#ViewTabs::tab:selected { color: {text}; border-bottom: 3px solid {accent}; }
+QTabBar#ViewTabs::tab:hover:!selected { color: {text}; }
+QTableView#Ledger, QTableWidget#Ledger { border: 1px solid {border}; border-radius: 4px; background: {surface};
+    selection-background-color: {hover}; selection-color: {text}; }
+QTableView#Ledger::item, QTableWidget#Ledger::item { border-bottom: 1px solid {surface2}; padding: 0 6px; }
+QHeaderView::section { background: {surface}; color: {muted}; font-size: 9pt; font-weight: 700;
+    border: none; border-bottom: 2px solid {border}; padding: 7px 6px; }
+QPushButton { border-radius: 4px; }
+QLineEdit, QComboBox, QDoubleSpinBox, QDateEdit, QPlainTextEdit { border-radius: 4px; }

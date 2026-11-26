@@ -1,0 +1,92 @@
+{
+  "slug": "buyurtmalar-daftari",
+  "exe_name": "BuyurtmalarDaftari",
+  "version": "1.0.0",
+  "accent": "#c2410c",
+  "icon_text": "",
+  "folder": "Mijoz buyurtmalari daftari",
+  "name": {
+    "uz": "Mijoz buyurtmalari daftari",
+    "ru": "Журнал заказов клиентов",
+    "en": "Client Orders Journal"
+  },
+  "description": {
+    "uz": "Frilanser dizayner uchun buyurtmalar daftari: mijozlar, buyurtmalar, oldindan to'lov va to'lovlar, muddatlar, qarzlar va oylik daromad. Excel eksport va PDF hisob-faktura.",
+    "ru": "Журнал заказов для дизайнера-фрилансера: клиенты, заказы, предоплата и платежи, сроки, долги и доход по месяцам. Экспорт в Excel и счета в PDF.",
+    "en": "An order journal for freelance designers: clients, orders, prepayments and payments, deadlines, balances and monthly income. Excel export and PDF invoices."
+  },
+  "features": {
+    "uz": [
+      "Mijozlar: ism, telefon, Telegram, izoh va har birining buyurtmalari",
+      "Buyurtmalar: tur, narx (so'm), oldindan to'lov, muddat, holat, loyiha papkasi",
+      "Holatlar: yangi, jarayonda, tekshiruvda, tugallangan, bekor; rangli belgilar",
+      "Muddati o'tgan buyurtmalar qizil bilan ajratiladi",
+      "Ko'rsatkichlar: faol buyurtmalar, muddati o'tganlar, shu oy tushum, mijozlar qarzi",
+      "Oxirgi 12 oy daromad grafigi va turlar bo'yicha hisobot",
+      "Excel ga eksport, PDF hisob-faktura (dizayner ismi bilan)",
+      "Ma'lumotlar kompyuterda, SQLite bazada; internet kerak emas"
+    ],
+    "ru": [
+      "Клиенты: имя, телефон, Telegram, заметки и их заказы",
+      "Заказы: тип, цена (сум), предоплата, срок, статус, папка проекта",
+      "Статусы: новый, в работе, на проверке, завершён, отменён; цветные метки",
+      "Просроченные заказы выделяются красным",
+      "Показатели: активные заказы, просроченные, поступления за месяц, долг клиентов",
+      "График дохода за 12 месяцев и отчёт по типам работ",
+      "Экспорт в Excel, счёт в PDF (с именем дизайнера)",
+      "Данные хранятся локально в SQLite; интернет не нужен"
+    ],
+    "en": [
+      "Clients: name, phone, Telegram, notes and their orders",
+      "Orders: type, price (UZS), prepayment, deadline, status, project folder",
+      "Statuses: new, in progress, in review, completed, cancelled with colour tags",
+      "Overdue orders highlighted in red",
+      "Overview: active orders, overdue, received this month, outstanding balance",
+      "12-month income chart and breakdown by work type",
+      "Excel export and PDF invoices with the designer's name",
+      "Data stays on your computer in SQLite; no internet needed"
+    ]
+  },
+  "category": "Biznes / frilans",
+  "min_os": "Windows 10 (1809+) / Windows 11, x64",
+  "build": {
+    "mode": "onefile",
+    "excludes": [
+      "numpy",
+      "matplotlib",
+      "PIL"
+    ],
+    "hidden_imports": [
+      "openpyxl"
+    ]
+  },
+  "font": "Calibri",
+  "topics": [
+    "freelance",
+    "orders",
+    "crm",
+    "invoice",
+    "designer-tools",
+    "sqlite"
+  ],
+  "palette": {
+    "light": {
+      "bg": "#f6f1ec",
+      "surface": "#fffdfa",
+      "surface2": "#f3ece5",
+      "border": "#e2d6cb",
+      "text": "#2a211b",
+      "muted": "#7a6c61",
+      "hover": "#f8e9dc"
+    },
+    "dark": {
+      "bg": "#1a1512",
+      "surface": "#231c18",
+      "surface2": "#2c241f",
+      "border": "#3d322b",
+      "text": "#f1e9e2",
+      "muted": "#ab9c90",
+      "hover": "#3a2a20"
+    }
+  }
+}
