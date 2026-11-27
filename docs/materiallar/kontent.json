@@ -1,0 +1,426 @@
+{
+ "nom": "Mijoz buyurtmalari daftari",
+ "muallif": "Hakimov Bahtiyorjon",
+ "maqola": {
+  "udk": "004.42:004.65",
+  "sarlavha": {
+   "uz": "Frilanser dizaynerlar uchun mijozlar, buyurtmalar va to‘lovlarni hisobga oluvchi oflayn axborot tizimi: ma’lumotlar modeli, arxitektura va amalga oshirish",
+   "ru": "Офлайн-информационная система учёта клиентов, заказов и оплат для дизайнеров-фрилансеров: модель данных, архитектура и реализация",
+   "en": "An Offline Information System for Tracking Clients, Orders and Payments of Freelance Designers: Data Model, Architecture and Implementation"
+  },
+  "annotatsiya": {
+   "uz": "Maqolada mustaqil ishlovchi dizaynerlar uchun mo‘ljallangan “Mijoz buyurtmalari daftari” stol dasturi tavsiflanadi. Dastur mijozlar, buyurtmalar va to‘lovlarni o‘zaro bog‘langan uchta jadvaldan iborat SQLite bazasida saqlaydi, har bir buyurtma bo‘yicha to‘langan summa va qarzni avtomatik hisoblaydi, muddati o‘tgan faol buyurtmalarni ajratib ko‘rsatadi, oxirgi 12 oy tushumini grafikda va ish turlari bo‘yicha jadvalda aks ettiradi. Ma’lumotlarni Excel fayliga eksport qilish va PDF hisob-faktura tayyorlash imkoniyatlari mavjud. Dastur Python 3.12 va PySide6 (Qt 6) asosida yaratilgan, internetsiz ishlaydi, interfeysi o‘zbek, rus va ingliz tillarida. Ishda ma’lumotlar modeli, hisob-kitob qoidalari, arxitektura, testlar tarkibi va cheklovlar yoritilgan.",
+   "ru": "В статье описывается настольная программа «Mijoz buyurtmalari daftari», предназначенная для дизайнеров, работающих самостоятельно. Программа хранит клиентов, заказы и оплаты в базе SQLite из трёх связанных таблиц, автоматически рассчитывает оплаченную сумму и долг по каждому заказу, выделяет просроченные активные заказы, отображает поступления за последние 12 месяцев на диаграмме и в таблице по видам работ. Предусмотрены экспорт данных в файл Excel и формирование счёта в формате PDF. Программа создана на Python 3.12 и PySide6 (Qt 6), работает без интернета, интерфейс доступен на узбекском, русском и английском языках. Рассмотрены модель данных, правила расчётов, архитектура, состав тестов и ограничения.",
+   "en": "The paper describes “Mijoz buyurtmalari daftari”, a desktop program for designers who work independently. The program stores clients, orders and payments in an SQLite database of three related tables, automatically calculates the amount paid and the outstanding debt for each order, highlights overdue active orders, and shows income for the last 12 months as a bar chart and a table by type of work. Data can be exported to an Excel workbook, and a PDF invoice can be produced for any order. The program is built with Python 3.12 and PySide6 (Qt 6), works without an internet connection and offers an Uzbek, Russian and English interface. The data model, calculation rules, architecture, test suite and limitations are discussed."
+  },
+  "kalit": {
+   "uz": [
+    "buyurtmalar hisobi",
+    "mijozlar bazasi",
+    "frilans",
+    "SQLite",
+    "hisob-faktura",
+    "PySide6",
+    "oflayn dastur"
+   ],
+   "ru": [
+    "учёт заказов",
+    "база клиентов",
+    "фриланс",
+    "SQLite",
+    "счёт",
+    "PySide6",
+    "офлайн-программа"
+   ],
+   "en": [
+    "order tracking",
+    "client database",
+    "freelancing",
+    "SQLite",
+    "invoice",
+    "PySide6",
+    "offline software"
+   ]
+  },
+  "bolimlar": [
+   {
+    "sarlavha": "Kirish",
+    "matn": [
+     "Grafik dizayn sohasida xizmat ko‘rsatuvchi mutaxassislarning katta qismi mustaqil, ya’ni frilans asosida ishlaydi. Bunday mutaxassis bir vaqtning o‘zida bir nechta mijoz bilan ishlaydi, har bir buyurtma bo‘yicha narx, oldindan to‘lov, topshirish muddati va qisman to‘lovlarni kuzatib borishi kerak. Ma’lumotlar yozuv daftarida, messenjer yozishmalarida yoki tartibsiz elektron jadvallarda saqlansa, muddatni o‘tkazib yuborish, qarzdorlikni unutish va oylik daromadni aniq bilmaslik xavfi yuzaga keladi.",
+     "“Raqamli O‘zbekiston – 2030” strategiyasida tadbirkorlik va xizmat ko‘rsatish sohasida raqamli texnologiyalarni keng joriy etish vazifasi belgilangan. Mustaqil ishlovchi mutaxassislar va kichik ijodiy jamoalar uchun buyurtmalarni hisobga olishning raqamli vositasi ushbu vazifaning amaliy ko‘rinishlaridan biridir. Bunday vosita mahalliy pul birligida (so‘mda) hisob yuritishi, o‘zbek tilida interfeysga ega bo‘lishi va internet aloqasiga bog‘liq bo‘lmasligi maqsadga muvofiq.",
+     "Mazkur maqolada ana shu talablarga javob beruvchi “Mijoz buyurtmalari daftari” dasturi taqdim etiladi. Dastur frilanser dizayner faoliyatining asosiy hisob obyektlarini (mijoz, buyurtma, to‘lov) relyatsion ma’lumotlar bazasida saqlaydi, ular asosida hisob-kitoblarni avtomatik bajaradi va natijalarni ko‘rsatkichlar, grafik hamda hujjatlar ko‘rinishida taqdim etadi.",
+     "Buyurtmalar hisobini yuritishning amaliy ahamiyati shundaki, frilanser uchun daromadning asosiy qismi qisman to‘lovlar orqali, turli vaqtda tushadi. Bitta buyurtma bo‘yicha oldindan to‘lov, oraliq to‘lov va yakuniy hisob-kitob turli oylarga to‘g‘ri kelishi mumkin. Shuning uchun oylik tushumni to‘g‘ri aniqlash va har bir mijozning qolgan qarzini bilish uchun to‘lovlarni buyurtmaga bog‘langan holda, sanasi bilan qayd etish zarur.",
+     "Tadqiqot obyekti sifatida mustaqil ishlovchi dizaynerning buyurtmalar bilan ishlash jarayoni, predmeti sifatida esa bu jarayonni avtomatlashtiruvchi dasturiy vositaning ma’lumotlar modeli, hisob-kitob qoidalari va arxitekturasi olingan. Maqolada dasturning manba kodi, avtomatik testlari va foydalanuvchi interfeysi tahlil qilinadi."
+    ]
+   },
+   {
+    "sarlavha": "Muammoning qo‘yilishi va mavjud yechimlar tahlili",
+    "matn": [
+     "Hal etilishi lozim bo‘lgan masalani quyidagicha ifodalash mumkin. Dizayner har bir buyurtma uchun uning nomi, mijozi, ish turi, narxi, oldindan to‘lovi, muddati, holati va loyiha fayllari joylashgan papkani qayd etadi. Buyurtma bo‘yicha keyingi to‘lovlar sanasi va izohi bilan alohida kiritiladi. Tizim har bir buyurtma bo‘yicha to‘langan summa va qarzni, umumiy faol va muddati o‘tgan buyurtmalar sonini, joriy oy tushumi va mijozlarning umumiy qarzini hisoblab, ularni bir qarashda ko‘rsatishi kerak. Bundan tashqari, hisobot uchun ma’lumotlarni elektron jadvalga chiqarish va mijozga taqdim etish uchun hisob-faktura tayyorlash talab etiladi.",
+     "Bu masalani hal qilishda amaliyotda quyidagi yechim turlari qo‘llanadi:",
+     "- Umumiy maqsadli elektron jadvallar. Ular moslashuvchan, lekin qarz va muddat nazoratini formulalar orqali har bir foydalanuvchi o‘zi tuzishi kerak, jadvallar orasidagi bog‘lanishlar (mijoz va uning buyurtmalari) qo‘lda yuritiladi, xatolik ehtimoli yuqori.",
+     "- Bulutli loyiha boshqaruvi va mijozlar bilan munosabatlarni boshqarish (CRM) xizmatlari. Ular keng imkoniyatlarga ega, ammo doimiy internet aloqasini, ro‘yxatdan o‘tishni va ko‘pincha obuna to‘lovini talab qiladi, ma’lumotlar uchinchi tomon serverida saqlanadi, mahalliy pul birligi va til qo‘llab-quvvatlanishi har doim ham mavjud emas.",
+     "- Buxgalteriya hisobi dasturlari. Ular korxonalar uchun mo‘ljallangan, frilanserning kundalik buyurtma oqimi uchun ortiqcha murakkab bo‘lishi mumkin.",
+     "Shu tahlil asosida ishlab chiqilayotgan dasturga quyidagi talablar qo‘yildi: ma’lumotlarni foydalanuvchi kompyuterida bitta fayl ko‘rinishida saqlash; internetsiz ishlash; mijoz, buyurtma va to‘lovlarni bog‘langan holda yuritish; qarz va muddat holatini avtomatik hisoblash; daromadni oylar va ish turlari kesimida ko‘rsatish; Excel va PDF formatlarida hujjat tayyorlash; o‘zbek tilidagi interfeys va so‘mdagi summalar.",
+     "Talablar ichida ma’lumotlarning mahalliy saqlanishi alohida o‘rin tutadi. Mijozlar ro‘yxati telefon raqamlari va boshqa aloqa ma’lumotlarini o‘z ichiga oladi, ya’ni shaxsiy ma’lumotlar hisoblanadi. Ularni foydalanuvchi kompyuterida saqlash ma’lumotlar ustidan nazoratni foydalanuvchining o‘zida qoldiradi va uchinchi tomon xizmatlariga bog‘liqlikni yo‘qotadi. Bundan tashqari, bitta fayl ko‘rinishidagi baza zaxira nusxa olish va boshqa kompyuterga ko‘chirishni soddalashtiradi."
+    ]
+   },
+   {
+    "sarlavha": "Tadqiqot metodologiyasi va dasturiy arxitektura",
+    "matn": [
+     "Dastur Python 3.12 tilida yozilgan. Grafik interfeys Qt 6 kutubxonasining rasmiy Python bog‘lamasi PySide6 yordamida qurilgan, ma’lumotlar Python standart kutubxonasidagi sqlite3 moduli orqali SQLite bazasida saqlanadi, Excel fayllari openpyxl kutubxonasi yordamida yoziladi, PDF hisob-faktura esa Qt ning chop etish modulidagi QPrinter sinfi orqali yaratiladi. Dastur PyInstaller yordamida bitta bajariladigan faylga yig‘iladi.",
+     "Dastur manba kodi quyidagi modullarga ajratilgan:",
+     "- Ma’lumotlar bazasi moduli. U interfeysdan mustaqil bo‘lib, jadvallar sxemasini yaratish, mijoz, buyurtma va to‘lovlarni qo‘shish, o‘zgartirish va o‘chirish, filtrlangan ro‘yxatlarni olish, ko‘rsatkichlar va oylik tushumni hisoblash funksiyalarini o‘z ichiga oladi. Pul summalarini formatlash va matndan o‘qish, Telegram manzilini normallashtirish, muddat o‘tganini aniqlash funksiyalari ham shu modulda joylashgan.",
+     "- Eksport moduli. U Excel kitobini to‘rt varaq bilan yozadi va hisob-faktura uchun HTML matnini shakllantirib, uni A4 o‘lchamdagi PDF faylga aylantiradi.",
+     "- Oyna moduli. Unda asosiy oyna, “Buyurtmalar”, “Mijozlar” va “Daromad” ko‘rinishlari, buyurtma va mijoz tahrirlash panellari, ko‘rsatkich kartalari hamda daromad grafigi amalga oshirilgan.",
+     "- Umumiy yordamchi to‘plam (uzkit). U ilova sozlamalarini JSON faylda saqlash, uch tilli matnlar lug‘ati, yorug‘ va qorong‘i mavzu, xatolar jurnali va standart menyularni ta’minlaydi.",
+     "Modullar o‘rtasidagi bog‘lanish bir yo‘nalishli: oyna moduli baza va eksport modullariga murojaat qiladi, ular esa interfeysga bog‘liq emas. Bu yondashuv biznes qoidalarini grafik interfeysdan alohida, xotiradagi baza ustida sinovdan o‘tkazish imkonini beradi. Interfeys matnlari kalit so‘zlar orqali uch tilli lug‘atdan olinadi, shuning uchun holat va ish turlari bazada til-neytral kodlar ko‘rinishida saqlanadi va ekranda joriy tilga tarjima qilinadi. Masalan, holatlar bazada “yangi”, “jarayonda”, “tekshiruvda”, “tugallangan”, “bekor” kodlari bilan yoziladi, har biriga alohida rang biriktirilgan: ko‘k, to‘q sariq, binafsha, yashil va kulrang.",
+     "Ma’lumotlar modeli. Baza uchta jadvaldan iborat. Mijozlar jadvalida ism, telefon, Telegram manzili, izoh va yaratilgan sana saqlanadi. Buyurtmalar jadvalida mijozga havola, nom, ish turi, narx, oldindan to‘lov, muddat, holat, loyiha papkasi, izoh, qabul qilingan sana va tugallangan sana saqlanadi. To‘lovlar jadvalida buyurtmaga havola, summa, sana va izoh saqlanadi. Tashqi kalitlar yoqilgan: mijoz o‘chirilganda uning buyurtmalari saqlanib qoladi, ammo mijozga havola bo‘shatiladi; buyurtma o‘chirilganda esa unga tegishli to‘lovlar ham kaskad tarzda o‘chiriladi. Mijoz va buyurtma bo‘yicha qidiruvni tezlashtirish uchun ikki indeks yaratilgan. Summalar butun so‘mda, sanalar ISO 8601 formatida (yil-oy-kun) saqlanadi.",
+     "Hisob-kitob qoidalari. Buyurtma bo‘yicha to‘langan summa oldindan to‘lov va keyingi barcha to‘lovlar yig‘indisiga teng. Qarz narx va to‘langan summa ayirmasi sifatida hisoblanadi, manfiy bo‘lmaydi, bekor qilingan buyurtmalar uchun esa nolga teng. Buyurtma “Yangi”, “Jarayonda” yoki “Tekshiruvda” holatida bo‘lsa faol hisoblanadi; faol buyurtmaning muddati bugungi sanadan oldin bo‘lsa, u muddati o‘tgan deb belgilanadi. Holat “Tugallangan” ga o‘zgartirilganda tugallangan sana avtomatik yoziladi, boshqa holatga qaytarilganda esa tozalanadi. Tushum hisobiga oldindan to‘lovlar buyurtma qabul qilingan sana bilan, keyingi to‘lovlar esa o‘z sanasi bilan kiradi; bekor qilingan buyurtmalarning to‘lovlari tushumga qo‘shilmaydi.",
+     "Pul summalarini kiritishning qulayligi uchun matndan summa o‘qish funksiyasi bo‘shliq, nuqta va vergul bilan ajratilgan turli yozuvlarni (masalan, “1 500 000”, “1.500.000”, “1,500,000.50”) to‘g‘ri talqin qiladi: bir xil ajratgich bir necha marta takrorlansa yoki oxirgi ajratgichdan keyin uch raqam kelsa, u minglik ajratgich deb hisoblanadi. Telegram manzili kiritilganda havola qismi olib tashlanadi va kerak bo‘lsa boshiga “@” belgisi qo‘shiladi.",
+     "Oflayn ishlash va ishonchlilik. Baza fayli foydalanuvchi profilidagi ilova ma’lumotlari papkasida (%APPDATA%\\BahtiyorSoft\\buyurtmalar-daftari) joylashadi. Dastur kodida faqat bitta tarmoqqa oid amal bor: mijoz kartasidagi “Telegram” tugmasi mijozning Telegram sahifasini tizim brauzerida ochadi; boshqa barcha amallar mahalliy bajariladi. Agar baza fayli ochilmasa yoki buzilgan bo‘lsa, dastur uni sana va vaqt qo‘shilgan nom bilan zaxiraga ko‘chiradi, yangi bo‘sh baza ochadi va foydalanuvchiga zaxira fayl yo‘lini ko‘rsatadi. Excel yoki PDF faylni yozib bo‘lmasa (fayl boshqa dasturda ochiq yoki faqat o‘qish uchun), foydalanuvchiga tushunarli xabar chiqariladi, kutilmagan xatolar esa jurnal fayliga yoziladi."
+    ]
+   },
+   {
+    "sarlavha": "Amalga oshirish va asosiy funksiyalar",
+    "matn": [
+     "Asosiy oynaning yuqori qismida “Buyurtmalar”, “Mijozlar” va “Daromad” ko‘rinishlari o‘rtasida almashuvchi yorliqlar, “Excel ga eksport” va “Yangi buyurtma” tugmalari joylashgan. Ularning ostida to‘rtta ko‘rsatkich kartasi doimiy ko‘rinadi: “Faol buyurtmalar”, “Muddati o‘tgan”, “Shu oy tushum” va “Mijozlar qarzi”. “Muddati o‘tgan” kartasi bosilganda ro‘yxat faqat muddati o‘tgan buyurtmalar bilan filtrlanadi.",
+     "“Buyurtmalar” ko‘rinishi. Chap qismda qidiruv maydoni, holat va mijoz bo‘yicha filtrlar hamda buyurtmalar jadvali joylashgan. Jadval ustunlari: “Mijoz”, “Buyurtma”, “Turi”, “Narx”, “Qarz”, “Muddat”, “Holat”. Qidiruv buyurtma nomi, mijoz ismi, ish turi va izoh bo‘yicha katta-kichik harfni farqlamasdan bajariladi. Holat filtri “Barcha holatlar”, “Faqat faol”, “Muddati o‘tgan” va beshta holatdan iborat. Muddat ustunida sana bilan birga “5 kun kechikdi” yoki “3 kun qoldi” kabi izoh chiqadi, muddati o‘tgan qator qizil rangda ajratiladi, holat esa rangli belgi bilan ko‘rsatiladi. Ro‘yxatda avval faol buyurtmalar muddati bo‘yicha, so‘ng tugallangan va bekor qilinganlar joylashadi.",
+     "Buyurtma paneli. O‘ng tomondagi panelda “Buyurtma”, “Mijoz”, “Turi”, “Narx”, “Oldindan to‘lov”, “Muddat”, “Holat”, “Papka” va “Izoh” maydonlari joylashgan. Ish turlari ro‘yxati to‘qqizta: logotip, banner, qadoq, brendbuk, poligrafiya, SMM dizayn, veb-dizayn, illyustratsiya va boshqa. Narx maydonlari so‘m qo‘shimchasi va minglik ajratgich bilan ko‘rsatiladi. “Papka” maydoniga loyiha papkasi biriktiriladi va yonidagi tugma uni Windows Explorer’da ochadi. “To‘lovlar” bo‘limida keyingi to‘lovlar ro‘yxati, “To‘lov qo‘shish” va to‘lovni o‘chirish tugmalari, pastda buyurtmani o‘chirish, “Hisob-faktura (PDF)” va “Saqlash” tugmalari bor. Buyurtmani o‘chirish uning to‘lovlari bilan birga o‘chirilishi haqidagi tasdiqdan keyin bajariladi.",
+     "Panel pastida buyurtma bo‘yicha xulosa satri joylashgan: unda to‘langan summa va qarz ko‘rsatiladi, qarz mavjud bo‘lsa, u qizil rangda chiqadi. Xulosa narx yoki oldindan to‘lov maydoni o‘zgarishi bilanoq, saqlashni kutmasdan qayta hisoblanadi. “To‘lov qo‘shish” tugmasi summa so‘raladigan oynani ochadi, unda standart qiymat sifatida buyurtmaning joriy qoldiq qarzi taklif etiladi; to‘lov bugungi sana bilan yoziladi. Muddat maydoni kalendar ochiladigan sana tanlagich ko‘rinishida amalga oshirilgan, muddat ko‘rsatilmasligi ham mumkin.",
+     "“Mijozlar” ko‘rinishi. Jadvalda “Nomi”, “Telefon”, “Telegram”, “Buyurtmalar”, “Jami” va “Qarz” ustunlari ko‘rsatiladi, qarzi bor mijozlar summasi qizil rangda chiqadi. Qidiruv ism, telefon yoki Telegram bo‘yicha ishlaydi. O‘ngdagi kartada mijoz ma’lumotlari tahrirlanadi, “Mijoz buyurtmalari” jadvalida uning barcha buyurtmalari holati bilan ko‘rinadi; jadvaldagi buyurtmani ikki marta bosish uni “Buyurtmalar” ko‘rinishida ochadi. Kartadan to‘g‘ridan to‘g‘ri shu mijoz uchun “Yangi buyurtma” yaratish mumkin. Mijoz o‘chirilganda uning buyurtmalari mijozsiz holda saqlanib qoladi.",
+     "“Daromad” ko‘rinishi. Chapda “Oylik tushum, oxirgi 12 oy” ustunli grafigi joylashgan, joriy oy ustuni to‘q rang bilan ajratiladi. Grafik ostida “12 oyda jami” va “O‘rtacha oyiga” ko‘rsatkichlari chiqadi. O‘ngda “Turlar bo‘yicha” jadvali har bir ish turidagi buyurtmalar soni va narxlari yig‘indisini kamayish tartibida ko‘rsatadi (bekor qilingan buyurtmalarsiz).",
+     "Daromad grafigi tashqi diagramma kutubxonalarisiz, QPainter vositalari bilan chizilgan. Vertikal o‘qda summalar millionlarda belgilanadi, gorizontal o‘qda oy va yilning qisqa yozuvi beriladi. Sichqoncha ustun ustiga olib borilganda shu ustun yorqinroq bo‘ladi va uning ustida oy summasi to‘liq ko‘rinishda chiqadi; sichqoncha grafikdan tashqarida bo‘lsa, joriy oy summasi ko‘rsatiladi. Bunday yondashuv bajariladigan fayl tarkibiga qo‘shimcha kutubxona kiritmasdan, dastur mavzusiga mos grafik olish imkonini berdi.",
+     "Hujjatlar. “Excel ga eksport” amali buyurtmalar, mijozlar, to‘lovlar va oylik tushum varaqlaridan iborat xlsx faylni yaratadi; buyurtmalar varag‘ida muddati o‘tgan qatorlar alohida ajratiladi. “Hisob-faktura (PDF)” amali tanlangan buyurtma uchun A4 formatdagi hujjat yaratadi: unda hisob-faktura raqami va sanasi, dizayner ismi, mijoz va uning aloqa ma’lumotlari, buyurtma nomi, turi va muddati, oldindan to‘lov va keyingi to‘lovlar jadvali, narx, to‘langan summa va to‘lanishi kerak bo‘lgan qoldiq ko‘rsatiladi. Hisob-fakturadagi dizayner ismi “Sozlamalar” menyusidagi “Dizayner ismi...” bandi orqali o‘zgartiriladi.",
+     "Interfeys sozlamalari. “Sozlamalar” menyusida “Til” (O‘zbekcha, Русский, English) va “Mavzu” (Yorug‘, Qorong‘i, Tizim bo‘yicha) bandlari mavjud; tilni almashtirish dasturni qayta ishga tushirishni talab qiladi."
+    ],
+    "rasmlar": [
+     {
+      "fayl": "docs/screenshots/1.png",
+      "izoh": "“Buyurtmalar” ko‘rinishi (namoyish ma’lumotlari): yuqorida to‘rtta ko‘rsatkich kartasi, chapda muddati o‘tgan qatorlari qizil bilan ajratilgan buyurtmalar jadvali, o‘ngda tanlangan buyurtma paneli"
+     },
+     {
+      "fayl": "docs/screenshots/2.png",
+      "izoh": "Qorong‘i mavzudagi “Mijozlar” ko‘rinishi: mijozlar jadvali, tanlangan mijoz kartasi va “Mijoz buyurtmalari” ro‘yxati"
+     },
+     {
+      "fayl": "docs/screenshots/3.png",
+      "izoh": "“Daromad” ko‘rinishi: oxirgi 12 oylik tushum grafigi, “12 oyda jami” va “O‘rtacha oyiga” ko‘rsatkichlari hamda “Turlar bo‘yicha” jadvali"
+     }
+    ]
+   },
+   {
+    "sarlavha": "Sinov va natijalar",
+    "matn": [
+     "Dastur pytest asosidagi avtomatik testlar bilan tekshiriladi. Testlar to‘rt faylda joylashgan 14 ta test funksiyasidan iborat.",
+     "- Ma’lumotlar bazasi testlari (6 ta). Ular pul summasini formatlashni, Telegram manzilini normallashtirishni, buyurtma bo‘yicha qarz va muddat o‘tganini hisoblashni, ko‘rsatkichlar va oylik tushumni, filtrlar ishlashini va mijoz o‘chirilganda buyurtmalarning saqlanishini, namoyish ma’lumotlari bilan to‘ldirilgan fayl bazasini qayta ochishni tekshiradi.",
+     "- Chuqur ssenariy testlari (5 ta). Ular turli ajratgichli summalarni matndan o‘qishni, to‘lov qo‘shish va holat o‘zgarishi zanjirini (jumladan, tugallangan sananing yozilishi va tozalanishi), faqat o‘qish uchun ochilgan faylga eksport qilinganda xato xabari chiqishini, buzilgan baza faylining zaxiraga olinib, yangi baza ochilishini hamda sozlamalarda dizayner ismi matn bo‘lmagan holatda ham dastur to‘g‘ri ishlashini tekshiradi.",
+     "- Tutun testlari (2 ta). Ular asosiy oynaning yaratilishini va interfeys matnlarining uch tilda to‘liqligini tekshiradi.",
+     "- Oyna ssenariysi testi (1 ta). U mijoz yaratish, unga buyurtma qo‘shish, to‘lov kiritish va ko‘rinishlar orasida o‘tish kabi foydalanuvchi harakatlari zanjirini tekshiradi.",
+     "Testlar foydalanuvchi profilini vaqtinchalik papkaga yo‘naltirgan holda bajariladi, shuning uchun haqiqiy ma’lumotlar bazasiga ta’sir qilmaydi. Baza moduli interfeysdan ajratilgani sababli hisob-kitob qoidalari xotiradagi bazada tez va izolyatsiyalangan holda sinovdan o‘tkaziladi.",
+     "Testlar tarkibida e’tiborga loyiq jihat shundaki, ular faqat “ijobiy” stsenariylarni emas, balki nosoz holatlarni ham qamrab oladi: buzilgan baza fayli, yozib bo‘lmaydigan eksport manzili, sozlamalar faylida noto‘g‘ri turdagi qiymat. Bu holatlarda dastur ishdan chiqmasligi va foydalanuvchiga tushunarli xabar berishi tekshiriladi. Hisob-kitob testlarida esa sana parametr sifatida beriladi, shuning uchun muddat o‘tishi va oylik tushum natijalari testlar qaysi kuni ishga tushirilishidan qat’i nazar bir xil bo‘ladi.",
+     "Dastur Windows 10 (1809 va undan keyingi versiyalar) hamda Windows 11 operatsion tizimlarining 64 bitli versiyalari uchun mo‘ljallangan. Interfeys o‘zbek, rus va ingliz tillarida mavjud. Ma’lumotlar SQLite fayl bazasida saqlanadi, eksport formatlari: Excel (xlsx) va PDF. Ishlash tezligi, foydalanuvchilar soni yoki foydalanuvchi qoniqishi bo‘yicha o‘lchovlar o‘tkazilmagan, shu sababli maqolada bunday ko‘rsatkichlar keltirilmaydi."
+    ]
+   },
+   {
+    "sarlavha": "Muhokama",
+    "matn": [
+     "Dasturning afzalliklari quyidagilarda namoyon bo‘ladi. Birinchidan, ma’lumotlar foydalanuvchi kompyuterida bitta SQLite faylida saqlanadi: uni zaxiralash uchun faylni nusxalash kifoya, internet aloqasi va ro‘yxatdan o‘tish talab etilmaydi. Ikkinchidan, qarz, muddat va tushum hisob-kitoblari bazadagi bog‘lanishlar asosida avtomatik bajariladi, bu qo‘lda yuritiladigan jadvallardagi formula xatolarini istisno qiladi. Uchinchidan, tashqi kalitlar va kaskad o‘chirish qoidalari ma’lumotlar yaxlitligini ta’minlaydi. To‘rtinchidan, hisob-faktura va Excel hisobotining dasturda tayyorlanishi mijoz bilan hisob-kitob va shaxsiy moliyaviy tahlilni soddalashtiradi.",
+     "Cheklovlar ham mavjud. Dastur bitta foydalanuvchi va bitta kompyuter uchun mo‘ljallangan, tarmoq orqali birgalikda ishlash yoki qurilmalar orasida sinxronlash yo‘q. Barcha summalar bitta pul birligida (so‘mda) yuritiladi, valyuta kurslari hisobga olinmaydi. Hisob-faktura shakli bitta shablon bilan cheklangan va soliq hisobotlari uchun rasmiy hujjat o‘rnini bosmaydi. Ma’lumotlarni Excel dan qayta import qilish imkoniyati mavjud emas. Baza fayli shifrlanmaydi, shuning uchun uning maxfiyligi kompyuterning umumiy himoyasiga bog‘liq.",
+     "Rivojlantirish istiqbollari sifatida bir nechta pul birligini qo‘llab-quvvatlash, avtomatik zaxira nusxa olish, hisob-faktura shablonlarini tanlash, muddat yaqinlashganda eslatma berish va ma’lumotlarni import qilish funksiyalarini qo‘shish ko‘rib chiqilishi mumkin.",
+     "Ishlab chiqish jarayonida qabul qilingan ayrim loyihaviy qarorlarni ham muhokama qilish lozim. Qarz va to‘langan summa bazada alohida maydon sifatida saqlanmaydi, balki har safar to‘lovlar jadvalidan hisoblanadi; bu yondashuv ma’lumotlar takrorlanishini va ular o‘rtasidagi nomuvofiqlikni istisno qiladi. Sanalarning matn ko‘rinishida yil-oy-kun formatida saqlanishi ularni oddiy matn sifatida solishtirish va oy bo‘yicha guruhlash (birinchi yetti belgi orqali) imkonini beradi. Summalarning butun son sifatida saqlanishi esa suzuvchi nuqtali sonlardagi yaxlitlash xatolaridan himoya qiladi.",
+     "Ta’lim nuqtai nazaridan dastur ma’lumotlar bazasini loyihalash bo‘yicha amaliy misol vazifasini ham o‘taydi: unda “bir-ko‘p” munosabatlar, tashqi kalitlar, kaskad o‘chirish va hisoblanadigan maydonlar real predmet sohasida ko‘rsatilgan. Shu sababli dasturdan axborot tizimlari va ma’lumotlar bazalari fanlarida ko‘rgazmali vosita sifatida foydalanish mumkin."
+    ]
+   },
+   {
+    "sarlavha": "Xulosa",
+    "matn": [
+     "Maqolada frilanser dizaynerlar uchun mo‘ljallangan “Mijoz buyurtmalari daftari” dasturining ma’lumotlar modeli, hisob-kitob qoidalari, arxitekturasi va funksiyalari bayon etildi. Dastur mijozlar, buyurtmalar va to‘lovlarni bog‘langan holda SQLite bazasida yuritadi, qarz, muddat va tushumni avtomatik hisoblaydi, natijalarni ko‘rsatkich kartalari, oylik grafik va ish turlari jadvalida taqdim etadi, Excel hisobot va PDF hisob-faktura tayyorlaydi.",
+     "Ishning ilmiy-amaliy ahamiyati shundaki, mustaqil ishlovchi mutaxassis faoliyatidagi asosiy hisob vazifalari ixcham relyatsion model va aniq ifodalangan hisob-kitob qoidalari orqali formallashtirildi. Qarz va tushum kabi ko‘rsatkichlarning saqlanmasdan, har safar dastlabki yozuvlardan hisoblanishi ma’lumotlar izchilligini kafolatlaydi, nosoz holatlarga munosabat esa avtomatik testlar bilan tasdiqlangan. Taklif etilgan yondashuvni boshqa xizmat ko‘rsatish sohalaridagi buyurtma asosida ishlovchi mutaxassislar uchun ham moslashtirish mumkin.",
+     "Dastur internetsiz ishlaydi, o‘zbek, rus va ingliz tillarida interfeysga ega va 14 ta avtomatik test bilan tekshirilgan. U mustaqil ishlovchi dizaynerlar, kichik ijodiy studiyalar, shuningdek dizayn va axborot texnologiyalari yo‘nalishidagi talabalarning o‘quv mashg‘ulotlari uchun qo‘llanilishi mumkin. Dastur manbalari muallifning GitHub sahifasida joylashtirilgan."
+    ]
+   }
+  ],
+  "adabiyotlar": [
+   "O‘zbekiston Respublikasi Prezidentining 2020-yil 5-oktabrdagi PF-6079-son “Raqamli O‘zbekiston – 2030” strategiyasini tasdiqlash va uni samarali amalga oshirish chora-tadbirlari to‘g‘risida”gi Farmoni.",
+   "Python Software Foundation. Python 3.12 Documentation [Elektron resurs]. – URL: https://docs.python.org/3.12/ (murojaat sanasi: 27.11.2026).",
+   "Python Software Foundation. sqlite3 – DB-API 2.0 interface for SQLite databases. Python 3.12 Documentation [Elektron resurs]. – URL: https://docs.python.org/3.12/library/sqlite3.html (murojaat sanasi: 27.11.2026).",
+   "SQLite Consortium. SQLite Documentation [Elektron resurs]. – URL: https://www.sqlite.org/docs.html (murojaat sanasi: 27.11.2026).",
+   "The Qt Company. Qt for Python (PySide6) Documentation [Elektron resurs]. – URL: https://doc.qt.io/qtforpython-6/ (murojaat sanasi: 27.11.2026).",
+   "The Qt Company. QPrinter Class. Qt 6 Documentation [Elektron resurs]. – URL: https://doc.qt.io/qt-6/qprinter.html (murojaat sanasi: 27.11.2026).",
+   "openpyxl Contributors. openpyxl – A Python library to read/write Excel 2010 xlsx/xlsm files [Elektron resurs]. – URL: https://openpyxl.readthedocs.io/en/stable/ (murojaat sanasi: 27.11.2026).",
+   "PyInstaller Development Team. PyInstaller Manual [Elektron resurs]. – URL: https://pyinstaller.org/en/stable/ (murojaat sanasi: 27.11.2026).",
+   "ISO 8601-1:2019. Date and time – Representations for information interchange – Part 1: Basic rules. – Geneva: ISO, 2019.",
+   "Hakimov B. Mijoz buyurtmalari daftari: manba kodi va bajariladigan fayl [Elektron resurs]. – URL: https://github.com/eduhakimov/buyurtmalar-daftari (murojaat sanasi: 27.11.2026)."
+  ]
+ },
+ "qollanma": {
+  "sarlavha": "Foydalanish qo‘llanmasi",
+  "bolimlar": [
+   {
+    "sarlavha": "Umumiy ma’lumot",
+    "matn": [
+     "“Mijoz buyurtmalari daftari” mustaqil ishlovchi dizayner yoki kichik ijodiy studiya uchun buyurtmalarni hisobga olish dasturi. U mijozlar ro‘yxatini, har bir buyurtmaning narxi, oldindan to‘lovi, muddati va holatini, keyingi to‘lovlarni yuritadi, qarz va muddati o‘tgan buyurtmalarni avtomatik ko‘rsatadi, oylik daromadni grafikda aks ettiradi.",
+     "Dastur yordamida quyidagi vazifalar bajariladi:",
+     "- mijozlar kartotekasini (ism, telefon, Telegram, izoh) yuritish;",
+     "- buyurtmalarni ish turi, narx, muddat va holat bo‘yicha qayd etish, loyiha papkasini biriktirish;",
+     "- oldindan to‘lov va keyingi to‘lovlarni kiritish, qarzni avtomatik hisoblash;",
+     "- muddati o‘tgan buyurtmalarni ajratib ko‘rish;",
+     "- oxirgi 12 oylik tushum va ish turlari bo‘yicha hisobotni ko‘rish;",
+     "- ma’lumotlarni Excel fayliga eksport qilish va mijozga PDF hisob-faktura tayyorlash.",
+     "Dastur interfeysi o‘zbek, rus va ingliz tillarida, yorug‘ va qorong‘i mavzularda ishlaydi. Summalar so‘mda yuritiladi. Qo‘llanmada tugma va bo‘lim nomlari dasturning o‘zbekcha interfeysidagidek berilgan.",
+     "Dastur ayniqsa bir vaqtning o‘zida bir nechta mijoz bilan ishlaydigan va to‘lovlarni bo‘lib-bo‘lib oladigan mutaxassislar uchun qulay: har bir to‘lov buyurtmaga bog‘lanib, sanasi bilan saqlanadi, shuning uchun istalgan paytda kim qancha qarzi borligini ko‘rish mumkin."
+    ]
+   },
+   {
+    "sarlavha": "Tizim talablari",
+    "matn": [
+     "- Operatsion tizim: Windows 10 (1809 va undan keyingi versiyalar) yoki Windows 11, 64 bitli.",
+     "- Internet aloqasi talab qilinmaydi. Faqat mijoz kartasidagi “Telegram” tugmasi Telegram sahifasini brauzerda ochish uchun internetdan foydalanadi.",
+     "- O‘rnatish shart emas: dastur bitta bajariladigan fayldan iborat.",
+     "- Excel faylini ko‘rish uchun xlsx formatini ochadigan dastur, PDF hisob-fakturani ko‘rish uchun PDF ko‘ruvchi kerak bo‘ladi.",
+     "Dastur ishlashi uchun qo‘shimcha dasturlar, ma’lumotlar bazasi serveri yoki internet orqali ro‘yxatdan o‘tish talab etilmaydi: barcha zarur komponentlar bajariladigan fayl ichida joylashgan."
+    ]
+   },
+   {
+    "sarlavha": "O‘rnatish va ishga tushirish",
+    "matn": [
+     "1. Dasturning GitHub sahifasidagi (https://github.com/eduhakimov/buyurtmalar-daftari) Releases bo‘limidan bajariladigan faylni yuklab oling.",
+     "2. Faylni qulay papkaga joylashtiring va ikki marta bosib ishga tushiring.",
+     "3. Birinchi ishga tushirishda Windows SmartScreen “Windows kompyuteringizni himoya qildi” degan ogohlantirish chiqarishi mumkin. Bu imzolanmagan dasturlar uchun odatiy holat: “Batafsil” havolasini, so‘ng “Baribir ishga tushirish” tugmasini bosing.",
+     "4. Dastur birinchi marta ochilganda bo‘sh baza yaratiladi va buyurtmalar ro‘yxatida “Buyurtmalar yo‘q. “Yangi buyurtma” tugmasini bosing.” degan yozuv chiqadi.",
+     "Dasturni yangilash uchun yangi versiyani yuklab olib, eski faylni almashtiring. Ma’lumotlar bazasi foydalanuvchi profilida saqlangani sababli yangilashda ma’lumotlar yo‘qolmaydi.",
+     "Dasturni kompyuterdan o‘chirish uchun bajariladigan faylni o‘chirish kifoya. Ma’lumotlar bazasi bunda o‘chirilmaydi; agar ma’lumotlar ham kerak bo‘lmasa, %APPDATA%\\BahtiyorSoft\\buyurtmalar-daftari papkasini qo‘lda o‘chiring. Buni qilishdan oldin baza faylidan zaxira nusxa olishni unutmang."
+    ]
+   },
+   {
+    "sarlavha": "Dastur oynasi bilan tanishish",
+    "matn": [
+     "Oynaning yuqori qismida menyu satri (“Fayl”, “Sozlamalar”, “Yordam”) joylashgan. Uning ostida uchta yorliq bor: “Buyurtmalar”, “Mijozlar” va “Daromad”. O‘ng tomonda “Excel ga eksport” va “Yangi buyurtma” tugmalari joylashgan.",
+     "Yorliqlar ostida to‘rtta ko‘rsatkich kartasi har doim ko‘rinadi:",
+     "- “Faol buyurtmalar” – “Yangi”, “Jarayonda” va “Tekshiruvda” holatidagi buyurtmalar soni;",
+     "- “Muddati o‘tgan” – muddati o‘tgan faol buyurtmalar soni; kartani bosish ro‘yxatda faqat ularni qoldiradi;",
+     "- “Shu oy tushum” – joriy oyda tushgan oldindan to‘lov va to‘lovlar yig‘indisi;",
+     "- “Mijozlar qarzi” – barcha bekor qilinmagan buyurtmalar bo‘yicha to‘lanmagan qoldiq.",
+     "“Buyurtmalar” ko‘rinishida chapda qidiruv maydoni, holat va mijoz filtrlari hamda buyurtmalar jadvali, o‘ngda tanlangan buyurtmani tahrirlash paneli joylashgan. Jadval ostida buyurtmalar soni ko‘rsatiladi. Pastdagi holat satrida saqlash natijalari haqida xabarlar chiqadi.",
+     "“Mijozlar” ko‘rinishida chapda qidiruv maydoni va mijozlar jadvali (“Nomi”, “Telefon”, “Telegram”, “Buyurtmalar”, “Jami”, “Qarz”), o‘ngda mijoz kartasi joylashgan. Kartada “Nomi”, “Telefon”, “Telegram”, “Izoh” maydonlari, Telegram sahifasini ochuvchi tugma, “Mijoz buyurtmalari” jadvali hamda o‘chirish, “Yangi buyurtma” va “Saqlash” tugmalari bor.",
+     "“Daromad” ko‘rinishida chapda “Oylik tushum, oxirgi 12 oy” grafigi va uning ostidagi ikki ko‘rsatkich, o‘ngda “Turlar bo‘yicha” jadvali va “Excel ga eksport” tugmasi joylashgan. Grafik ustunlari ustiga sichqoncha olib borilganda tegishli oy summasi ko‘rsatiladi."
+    ],
+    "rasmlar": [
+     {
+      "fayl": "docs/screenshots/1.png",
+      "izoh": "“Buyurtmalar” ko‘rinishi: ko‘rsatkich kartalari, filtrlar, buyurtmalar jadvali va o‘ngda “Festival afishasi” buyurtmasi paneli"
+     },
+     {
+      "fayl": "docs/screenshots/2.png",
+      "izoh": "“Mijozlar” ko‘rinishi (qorong‘i mavzu): mijozlar jadvali va tanlangan mijoz kartasi"
+     },
+     {
+      "fayl": "docs/screenshots/3.png",
+      "izoh": "“Daromad” ko‘rinishi: oylik tushum grafigi va “Turlar bo‘yicha” jadvali"
+     }
+    ]
+   },
+   {
+    "sarlavha": "Asosiy amallar",
+    "matn": [
+     "**Mijoz qo‘shish**",
+     "1. “Mijozlar” yorlig‘iga o‘ting.",
+     "2. O‘ng kartadagi “Yangi mijoz” tugmasini bosing.",
+     "3. “Nomi”, “Telefon”, “Telegram” va “Izoh” maydonlarini to‘ldiring. Telegram manzilini “@nom”, “nom” yoki “t.me/nom” ko‘rinishida kiritish mumkin, dastur uni “@nom” shakliga keltiradi.",
+     "4. “Saqlash” tugmasini bosing. Ism kiritilmasa, “Mijoz ismini kiriting.” xabari chiqadi.",
+     "**Buyurtma qo‘shish**",
+     "1. Yuqoridagi “Yangi buyurtma” tugmasini bosing yoki mijoz kartasidagi “Yangi buyurtma” tugmasidan foydalaning (bunda mijoz avtomatik tanlanadi).",
+     "2. O‘ng panelda “Buyurtma” (nomi), “Mijoz”, “Turi”, “Narx”, “Oldindan to‘lov”, “Muddat” va “Holat” maydonlarini to‘ldiring.",
+     "3. Kerak bo‘lsa, “Papka” maydoni yonidagi “...” tugmasi bilan loyiha papkasini tanlang va “Izoh” yozing.",
+     "4. “Saqlash” tugmasini bosing. Buyurtma nomi kiritilmasa, “Buyurtma nomini kiriting.” xabari chiqadi.",
+     "**To‘lov kiritish**",
+     "1. Jadvaldan buyurtmani tanlang.",
+     "2. “To‘lovlar” bo‘limidagi “To‘lov qo‘shish” tugmasini bosing.",
+     "3. “To‘lov summasi (so‘m):” oynasida standart qiymat sifatida buyurtmaning qolgan qarzi taklif etiladi; kerakli summani kiriting va tasdiqlang. To‘lov bugungi sana bilan qo‘shiladi.",
+     "4. Panel pastidagi xulosa va jadvaldagi “Qarz” ustuni avtomatik yangilanadi. Noto‘g‘ri kiritilgan to‘lovni tanlab, o‘chirish tugmasi bilan olib tashlang.",
+     "**Holatni o‘zgartirish va muddatni kuzatish**",
+     "1. Buyurtmani tanlab, “Holat” ro‘yxatidan “Yangi”, “Jarayonda”, “Tekshiruvda”, “Tugallangan” yoki “Bekor qilingan” ni tanlang va saqlang.",
+     "2. “Tugallangan” holatiga o‘tkazilganda tugallangan sana avtomatik yoziladi.",
+     "3. Muddati o‘tgan faol buyurtmalar jadvalda qizil rangda, “... kun kechikdi” izohi bilan ko‘rsatiladi. Ularni alohida ko‘rish uchun “Muddati o‘tgan” kartasini bosing yoki holat filtridan “Muddati o‘tgan” ni tanlang.",
+     "**Qidirish va filtrlash**",
+     "1. “Buyurtma, mijoz yoki izoh bo‘yicha qidirish” maydoniga so‘z kiriting.",
+     "2. Holat filtridan “Barcha holatlar”, “Faqat faol”, “Muddati o‘tgan” yoki aniq holatni tanlang.",
+     "3. Mijoz filtridan “Barcha mijozlar” yoki aniq mijozni tanlang. Mijozi ko‘rsatilmagan buyurtmalar jadvalning “Mijoz” ustunida “(mijozsiz)” deb ko‘rsatiladi.",
+     "**Loyiha papkasini ochish**",
+     "Buyurtma panelidagi “Papka” qatoridagi papka belgili tugmani bosing. Papka mavjud bo‘lmasa, “Papka topilmadi” xabari chiqadi.",
+     "**Hisob-faktura tayyorlash**",
+     "1. Buyurtmani tanlang va “Hisob-faktura (PDF)” tugmasini bosing.",
+     "2. Fayl nomi va papkani tasdiqlang. Hujjat yaratilgach, avtomatik ochiladi.",
+     "3. Hisob-fakturada dizayner ismi, mijoz, buyurtma ma’lumotlari, to‘lovlar va “To‘lanishi kerak” qoldiq summa ko‘rsatiladi.",
+     "**Excel ga eksport**",
+     "1. “Excel ga eksport” tugmasini bosing yoki “Fayl” menyusidagi shu bandni tanlang.",
+     "2. Fayl nomini tasdiqlang (standart nom buyurtmalar va bugungi sanadan iborat).",
+     "3. Faylda buyurtmalar, mijozlar, to‘lovlar va oylik tushum varaqlari bo‘ladi.",
+     "**Daromadni ko‘rish**",
+     "“Daromad” yorlig‘ida oxirgi 12 oyning tushumi ustunli grafikda ko‘rsatiladi, grafik ostida “12 oyda jami” va “O‘rtacha oyiga” qiymatlari chiqadi. “Turlar bo‘yicha” jadvalida har bir ish turi bo‘yicha buyurtmalar soni va narxlar yig‘indisi ko‘rsatiladi.",
+     "**O‘chirish**",
+     "Buyurtmani o‘chirish uchun panel pastidagi savat belgili tugmani bosing va so‘rovni tasdiqlang: buyurtma uning to‘lovlari bilan birga o‘chiriladi. Mijoz o‘chirilganda esa uning buyurtmalari saqlanadi, lekin mijozsiz qoladi.",
+     "**Namunaviy ish tartibi**",
+     "Kundalik ishda quyidagi tartib qulay: yangi murojaat kelganda avval mijozni qo‘shing (agar u bazada bo‘lmasa), so‘ng mijoz kartasidan buyurtma yarating va oldindan to‘lovni kiriting; ish boshlanganda holatni “Jarayonda”, mijozga ko‘rsatish uchun yuborganda “Tekshiruvda” qilib qo‘ying; har bir keyingi to‘lovni tushgan kuni kiriting; ish topshirilgach holatni “Tugallangan” ga o‘zgartiring. Har kuni ish boshida “Muddati o‘tgan” va “Mijozlar qarzi” kartalariga qarab chiqish muddat va qarz nazoratini osonlashtiradi. Oy oxirida “Daromad” ko‘rinishini ko‘rib, kerak bo‘lsa Excel ga eksport qiling."
+    ]
+   },
+   {
+    "sarlavha": "Sozlamalar",
+    "matn": [
+     "- **Til:** “Sozlamalar” → “Til” menyusidan O‘zbekcha, Русский yoki English ni tanlang. Tilni almashtirish uchun dastur qayta ishga tushiriladi.",
+     "- **Mavzu:** “Sozlamalar” → “Mavzu” menyusidan “Yorug‘”, “Qorong‘i” yoki “Tizim bo‘yicha” ni tanlang.",
+     "- **Dizayner ismi:** “Sozlamalar” → “Dizayner ismi...” bandida hisob-fakturada ko‘rsatiladigan ismni kiriting. Ism kiritilmagan bo‘lsa, standart muallif ismi ishlatiladi.",
+     "- Qo‘llanma va dastur haqidagi ma’lumot “Yordam” menyusida joylashgan.",
+     "Dasturda alohida sozlamalar oynasi yo‘q: til, mavzu va dizayner ismi menyu orqali o‘zgartiriladi, qolgan barcha ma’lumotlar bevosita ko‘rinishlarda kiritiladi. O‘zgartirilgan sozlamalar avtomatik saqlanadi va keyingi ishga tushirishda tiklanadi."
+    ]
+   },
+   {
+    "sarlavha": "Ma’lumotlarni saqlash va xavfsizlik",
+    "matn": [
+     "- Barcha ma’lumotlar %APPDATA%\\BahtiyorSoft\\buyurtmalar-daftari papkasidagi “buyurtmalar.db” faylida saqlanadi. Zaxira nusxa olish uchun dasturni yopib, shu faylni boshqa diskka yoki xotira qurilmasiga nusxalang.",
+     "- Ma’lumotlar internetga yuborilmaydi. Mijozlarning telefon raqami va boshqa shaxsiy ma’lumotlari faqat sizning kompyuteringizda saqlanadi, shuning uchun kompyuterga parol qo‘yish tavsiya etiladi.",
+     "- Baza fayli buzilgan bo‘lsa, dastur uni sana va vaqt qo‘shilgan nom bilan saqlab qo‘yadi, yangi bo‘sh baza ochadi va zaxira fayl joylashgan yo‘lni ko‘rsatadi. Bu holda buzilgan faylni o‘zgartirmang va mutaxassisga murojaat qiling.",
+     "- Dastur loyiha papkalaringizdagi fayllarni o‘zgartirmaydi: “Papka” maydoni faqat papka yo‘lini eslab qoladi va uni Explorer’da ochadi.",
+     "- Sozlamalar va xatolar jurnali ham shu papkada saqlanadi."
+    ]
+   },
+   {
+    "sarlavha": "Ko‘p uchraydigan savollar va muammolar",
+    "matn": [
+     "**Summa noto‘g‘ri o‘qildi.** Summani bo‘shliqsiz yoki “1 500 000” ko‘rinishida kiriting. Dastur nuqta va vergul bilan ajratilgan minglik guruhlarni ham taniydi, lekin bitta ajratgichdan keyin uchtadan ko‘p yoki kam raqam bo‘lsa, u kasr qism deb tushunilishi mumkin.",
+     "**“Faylni saqlab bo‘lmadi” xabari chiqdi.** Fayl boshqa dasturda (masalan, Excel’da) ochiq yoki papka faqat o‘qish uchun bo‘lishi mumkin. Faylni yoping yoki boshqa papkani tanlang.",
+     "**Bekor qilingan buyurtmaning qarzi ko‘rinmayapti.** Bekor qilingan buyurtmalar uchun qarz hisoblanmaydi va ularning to‘lovlari tushumga qo‘shilmaydi.",
+     "**Buyurtma muddati o‘tgan bo‘lsa ham qizil emas.** Faqat faol holatdagi (“Yangi”, “Jarayonda”, “Tekshiruvda”) buyurtmalar muddati o‘tgan deb belgilanadi. Tugallangan buyurtmalar ajratilmaydi.",
+     "**Oldindan to‘lov qaysi oyga yoziladi?** Oldindan to‘lov buyurtma qabul qilingan sana oyiga, keyingi to‘lovlar esa kiritilgan sana oyiga yoziladi.",
+     "**Mijozni o‘chirsam, buyurtmalar yo‘qoladimi?** Yo‘q, buyurtmalar saqlanadi va jadvalning “Mijoz” ustunida “(mijozsiz)” deb ko‘rsatiladi. Ularni keyinroq boshqa mijozga biriktirish mumkin.",
+     "**SmartScreen dasturni ishga tushirishga ruxsat bermayapti.** “Batafsil” havolasini, so‘ng “Baribir ishga tushirish” tugmasini bosing. Faylni faqat rasmiy GitHub sahifasidan yuklab oling.",
+     "**Excel faylida ba’zi qatorlar rangli.** Buyurtmalar varag‘ida muddati o‘tgan buyurtmalar alohida rang bilan ajratiladi, birinchi qator (sarlavhalar) esa aylantirishda qotirilgan holda turadi.",
+     "**Ma’lumotlarni boshqa kompyuterga ko‘chirish mumkinmi?** Ha. Ikkala kompyuterda dasturni yoping, “buyurtmalar.db” faylini eski kompyuterdagi %APPDATA%\\BahtiyorSoft\\buyurtmalar-daftari papkasidan yangisidagi xuddi shu papkaga nusxalang.",
+     "**Dastur kutilmagan xato haqida xabar berdi.** Xato tafsilotlari dastur ma’lumotlari papkasidagi jurnal fayliga yoziladi. Muammo takrorlansa, shu faylni GitHub sahifasi orqali muallifga yuboring."
+    ]
+   }
+  ]
+ },
+ "uslubiy": {
+  "sarlavha": "Uslubiy ko‘rsatma",
+  "bolimlar": [
+   {
+    "sarlavha": "Uslubiy ko‘rsatmaning maqsadi va vazifalari",
+    "matn": [
+     "Ushbu uslubiy ko‘rsatmaning maqsadi “Mijoz buyurtmalari daftari” dasturidan ma’lumotlar bazalari, axborot tizimlari, tadbirkorlik asoslari va dizayn sohasidagi kasbiy faoliyatni tashkil etishga oid fanlarda o‘quv vositasi sifatida foydalanish tartibini belgilashdan iborat. Dastur talabalarga buyurtmalarni hisobga olish jarayonini real predmet sohasi misolida ko‘rsatish, ma’lumotlar o‘rtasidagi bog‘lanishlar va avtomatik hisob-kitoblar mantiqini amalda o‘rgatish imkonini beradi.",
+     "Uslubiy ko‘rsatmaning vazifalari:",
+     "- dasturning imkoniyatlari va o‘quv jarayonidagi o‘rnini aniqlash;",
+     "- 80 daqiqalik amaliy mashg‘ulotning namunaviy rejasini taklif etish;",
+     "- dasturning haqiqiy funksiyalariga asoslangan amaliy topshiriqlar va kutilgan natijalarni berish;",
+     "- baholash mezonlari va nazorat savollarini shakllantirish;",
+     "- shaxsiy ma’lumotlar bilan ishlash madaniyati bo‘yicha qoidalarni eslatish.",
+     "Mashg‘ulot natijasida talaba mijoz, buyurtma va to‘lov o‘rtasidagi bog‘lanishni tushuntira oladi, qarz va tushumni hisoblash qoidalarini biladi, dasturda buyurtmalar oqimini yurita oladi, hisobot va hisob-faktura tayyorlaydi hamda ma’lumotlar xavfsizligini ta’minlash choralarini qo‘llaydi.",
+     "Ko‘rsatma o‘qituvchiga mashg‘ulotni tayyorlash vaqtini qisqartirish, topshiriqlarni bosqichma-bosqich tashkil etish va talabalar faoliyatini yagona mezonlar asosida baholashda yordam beradi. Ko‘rsatmadagi topshiriqlar guruhning tayyorgarlik darajasiga qarab qisqartirilishi yoki kengaytirilishi mumkin."
+    ]
+   },
+   {
+    "sarlavha": "Qo‘llash sohasi va maqsadli auditoriya",
+    "matn": [
+     "Dasturdan quyidagi fanlar va mutaxassisliklarda foydalanish tavsiya etiladi:",
+     "- oliy ta’lim muassasalarida “Ma’lumotlar bazasi”, “Axborot tizimlari”, “Tadbirkorlik asoslari”, “Dizayn menejmenti” fanlari;",
+     "- kollej va texnikumlarda grafik dizayn, kompyuter texnologiyalari va buxgalteriya yo‘nalishidagi kasbiy fanlar;",
+     "- frilans va mustaqil bandlik bo‘yicha qisqa muddatli kurslar va malaka oshirish mashg‘ulotlari;",
+     "- tashkilotlarda kichik ijodiy bo‘linmalar, dizayn studiyalari va reklama xizmatlari xodimlarining buyurtmalar hisobini yuritish ishlari.",
+     "Maqsadli auditoriya: o‘qituvchilar, talabalar, kollej o‘quvchilari, mustaqil ishlovchi dizaynerlar va kichik studiya rahbarlari. Dastur bilan ishlash uchun kompyuterdan boshlang‘ich foydalanish ko‘nikmalari yetarli; ma’lumotlar bazasi nazariyasi bo‘yicha dastlabki bilimlar mashg‘ulot samaradorligini oshiradi.",
+     "Kasbiy faoliyatda dastur dizayner, illyustrator, SMM mutaxassisi yoki veb-dizayner kabi buyurtma asosida ishlovchi mutaxassislarga buyurtmalar oqimini tartibga solish, mijozlar bilan hisob-kitobni nazorat qilish va oylik daromadni tahlil qilishda yordam beradi. Dasturdagi ish turlari ro‘yxati dizayn yo‘nalishiga moslashtirilgan, ammo “Boshqa” turi orqali boshqa xizmatlarni ham qayd etish mumkin."
+    ]
+   },
+   {
+    "sarlavha": "O‘quv mashg‘ulotida foydalanish tartibi",
+    "matn": [
+     "Quyida “Buyurtmalar va to‘lovlarni hisobga olish axborot tizimi” mavzusidagi 80 daqiqalik amaliy mashg‘ulot rejasi keltirilgan. Mashg‘ulotdan oldin o‘qituvchi kompyuterlarga dasturni joylashtiradi va har bir talabaga uch mijoz va besh buyurtmadan iborat shartli ma’lumotlar ro‘yxatini tarqatadi. Haqiqiy shaxslarning ma’lumotlaridan foydalanilmaydi.",
+     "1. Tashkiliy qism (5 daqiqa): davomatni tekshirish, mashg‘ulot maqsadi va kutilgan natijalarni e’lon qilish.",
+     "2. Nazariy qism (20 daqiqa): hisob obyektlari (mijoz, buyurtma, to‘lov) va ular orasidagi “bir-ko‘p” munosabatlar; tashqi kalit va kaskad o‘chirish tushunchasi; qarz, faol holat va muddat o‘tishini hisoblash qoidalari; tushumning oylar bo‘yicha hisobi; sanalarni yil-oy-kun formatida saqlashning afzalligi. O‘qituvchi dastur oynasini proyektorda namoyish qiladi.",
+     "3. Amaliy qism (45 daqiqa): talabalar 1–5-topshiriqlarni bajaradi. O‘qituvchi har bir topshiriqdan keyin ko‘rsatkich kartalaridagi qiymatlarni talabalar bilan birga tekshiradi.",
+     "4. Yakuniy qism (10 daqiqa): Excel eksport faylini birgalikda ko‘rib chiqish, natijalarni muhokama qilish, uyga vazifa berish.",
+     "Nazariy qismda talabalar e’tiborini quyidagi holatlarga qaratish tavsiya etiladi: mijoz o‘chirilganda buyurtmalar nima uchun saqlanadi, buyurtma o‘chirilganda esa to‘lovlar nima uchun o‘chiriladi; bekor qilingan buyurtma qarz va tushum hisobiga nega kirmaydi; oldindan to‘lov qaysi sana bilan tushumga yoziladi. Bu savollar ma’lumotlar yaxlitligi va biznes qoidalarining dasturda qanday ifodalanishini tushunishga yordam beradi.",
+     "Amaliy qismni juftlikda tashkil etish mumkin: bir talaba ma’lumotlarni kiritadi, ikkinchisi qarz va tushumni qog‘ozda mustaqil hisoblab, dastur natijasi bilan solishtiradi.",
+     "Mashg‘ulotga tayyorgarlik ko‘rishda o‘qituvchi dasturni oldindan o‘zi sinab ko‘rishi, shartli ma’lumotlar ro‘yxatini tuzishi va kutilgan ko‘rsatkichlar qiymatlarini (faol buyurtmalar soni, umumiy qarz, joriy oy tushumi) hisoblab qo‘yishi tavsiya etiladi. Bu amaliy qismda talabalar natijalarini tez tekshirishga imkon beradi. Muddati o‘tgan buyurtma hosil bo‘lishi uchun ro‘yxatda muddati mashg‘ulot kunidan oldingi sanaga belgilangan buyurtma bo‘lishi kerak.",
+     "Yakuniy qismda o‘qituvchi talabalar bilan birga quyidagi savollarni muhokama qiladi: qaysi ko‘rsatkich frilanser uchun eng muhim va nima uchun; qo‘lda yuritiladigan jadvalga nisbatan dasturning afzalligi va cheklovlari nimada; ma’lumotlar bazasi fayli yo‘qolsa, qanday oqibatlar bo‘ladi va undan qanday himoyalanish mumkin. Muhokama natijalari uy vazifasini tanlashda hisobga olinadi."
+    ],
+    "rasmlar": [
+     {
+      "fayl": "docs/screenshots/1.png",
+      "izoh": "Mashg‘ulotda namoyish qilinadigan “Buyurtmalar” ko‘rinishi: ko‘rsatkich kartalari, buyurtmalar jadvali va buyurtma paneli"
+     }
+    ]
+   },
+   {
+    "sarlavha": "Amaliy topshiriqlar",
+    "matn": [
+     "1. **Mijozlar kartotekasini yaratish.** Tarqatilgan ro‘yxat bo‘yicha uch mijozni ism, telefon, Telegram va izoh bilan kiriting. Kutilgan natija: “Mijozlar” jadvalida uchta yozuv, Telegram manzillari “@” bilan boshlanadi.",
+     "2. **Buyurtmalarni kiritish.** Har xil ish turi, narx, oldindan to‘lov va muddatga ega beshta buyurtma yarating, ulardan birining muddati o‘tgan bo‘lsin. Kutilgan natija: “Faol buyurtmalar” kartasida 5, “Muddati o‘tgan” kartasida 1, tegishli qator qizil rangda.",
+     "3. **To‘lovlar va qarz.** Ikki buyurtmaga qisman, bittasiga to‘liq to‘lov kiriting. Kutilgan natija: “Qarz” ustuni va “Mijozlar qarzi” kartasi qo‘lda hisoblangan qiymatlarga mos keladi.",
+     "4. **Holatlar bilan ishlash.** Bitta buyurtmani “Tugallangan”, bittasini “Bekor qilingan” holatiga o‘tkazing. Kutilgan natija: faol buyurtmalar soni kamayadi, bekor qilingan buyurtmaning qarzi nolga teng bo‘ladi, tushum qayta hisoblanadi.",
+     "5. **Qidiruv va filtrlar.** Buyurtmalarni mijoz, holat va kalit so‘z bo‘yicha filtrlang, “Muddati o‘tgan” kartasidan foydalaning. Kutilgan natija: har bir filtr natijasi bo‘yicha qisqa yozma izoh.",
+     "6. **Hisob-faktura.** Qisman to‘langan buyurtma uchun dizayner ismini o‘zgartirib, PDF hisob-faktura tayyorlang. Kutilgan natija: PDF faylda to‘lovlar jadvali va “To‘lanishi kerak” qoldiq summasi to‘g‘ri ko‘rsatilgan.",
+     "7. **Excel hisobot va tahlil.** Ma’lumotlarni Excel ga eksport qiling va oylik tushum varag‘i asosida “Daromad” ko‘rinishidagi grafik bilan solishtiring. Kutilgan natija: to‘rt varaqli xlsx fayl va qiymatlar mosligi haqida xulosa.",
+     "8. **Ma’lumotlar yaxlitligini tekshirish.** Bitta mijozni o‘chiring, so‘ng to‘lovli buyurtmani o‘chiring. Kutilgan natija: mijozning buyurtmalari saqlanib, “Mijoz” ustunida “(mijozsiz)” deb ko‘rsatiladi, o‘chirilgan buyurtmaning to‘lovlari tushumdan chiqadi; talaba buni tashqi kalit qoidalari bilan izohlaydi.",
+     "Topshiriqlar bajarilgach, talaba qisqa hisobot tayyorlaydi. Hisobotda kiritilgan ma’lumotlar, har bir topshiriqdan keyingi ko‘rsatkich kartalari qiymatlari, qo‘lda bajarilgan hisob-kitoblar va ularning dastur natijasi bilan solishtirilishi, aniqlangan farqlar va ularning sabablari yoziladi. 1–5-topshiriqlar mashg‘ulot vaqtida, 6–8-topshiriqlar mashg‘ulot oxirida yoki uy vazifasi sifatida bajariladi. Tayyorgarligi yuqori guruhlarda o‘qituvchi qo‘shimcha topshiriq sifatida Excel fayli asosida qarzdorlik bo‘yicha mijozlar reytingini tuzishni berishi mumkin."
+    ]
+   },
+   {
+    "sarlavha": "Baholash mezonlari",
+    "matn": [
+     "Amaliy ish 100 ball bilan baholanadi:",
+     "- mijoz, buyurtma va to‘lovlarning to‘liq va to‘g‘ri kiritilishi – 25 ball;",
+     "- qarz, tushum va muddat bo‘yicha hisob-kitoblarni mustaqil tekshirish va dastur natijasi bilan solishtirish – 25 ball;",
+     "- hisob-faktura va Excel hisobotning to‘g‘ri tayyorlanishi – 20 ball;",
+     "- ma’lumotlar yaxlitligi qoidalarini tushuntirish (8-topshiriq) – 15 ball;",
+     "- nazorat savollariga javob va muhokamadagi ishtirok – 15 ball.",
+     "Baholash shkalasi: 86–100 ball “a’lo”, 71–85 ball “yaxshi”, 55–70 ball “qoniqarli”, 55 balldan kam “qoniqarsiz”. Hisob-kitoblarda xatoga yo‘l qo‘yilgan, lekin talaba uning sababini to‘g‘ri aniqlagan holatda ball qisman saqlanadi.",
+     "Baholashda talabaning dasturdan foydalanish ko‘nikmasi bilan bir qatorda hisob-kitob mantiqini tushunishi ham hisobga olinadi. Masalan, qarz qiymati dastur ko‘rsatgani bilan mos kelgan, ammo talaba uni qanday hisoblanganini tushuntira olmagan holatda ikkinchi mezon bo‘yicha ball kamaytiriladi. Hisob-faktura va Excel fayllari elektron ko‘rinishda, talaba familiyasi yozilgan papkada topshiriladi."
+    ]
+   },
+   {
+    "sarlavha": "Nazorat savollari",
+    "matn": [
+     "1. Dastur qaysi uchta asosiy hisob obyekti bilan ishlaydi va ular o‘zaro qanday bog‘langan?",
+     "2. Buyurtma bo‘yicha to‘langan summa va qarz qanday hisoblanadi?",
+     "3. Qaysi holatlar faol hisoblanadi va buyurtma qachon muddati o‘tgan deb belgilanadi?",
+     "4. Mijoz o‘chirilganda uning buyurtmalari bilan nima sodir bo‘ladi va nima uchun?",
+     "5. Buyurtma o‘chirilganda uning to‘lovlari bilan nima sodir bo‘ladi?",
+     "6. “Shu oy tushum” ko‘rsatkichiga qaysi summalar kiradi?",
+     "7. Bekor qilingan buyurtmalar hisob-kitoblarda qanday hisobga olinadi?",
+     "8. Excel eksport fayli qaysi varaqlardan iborat?",
+     "9. Ma’lumotlar bazasi fayli qayerda saqlanadi va undan qanday zaxira nusxa olinadi?",
+     "10. Baza fayli buzilganda dastur qanday harakat qiladi?",
+     "Savollar og‘zaki so‘rov, yozma test yoki mustaqil ish himoyasida qo‘llanilishi mumkin. 2, 4, 5 va 7-savollarga javob berishda talaba dasturda bajargan amaliy topshiriqlaridan misol keltirishi tavsiya etiladi.",
+     "Javoblarni baholashda talabaning dastur interfeysidagi nomlarni to‘g‘ri atashi va hisob-kitob qoidalarini o‘z so‘zlari bilan tushuntira olishi hisobga olinadi."
+    ]
+   },
+   {
+    "sarlavha": "Mustaqil ish uchun tavsiyalar",
+    "matn": [
+     "- Bir oy davomida shartli (yoki o‘z o‘quv loyihalaringiz bo‘yicha) buyurtmalar oqimini dasturda yuriting va oy oxirida “Daromad” ko‘rinishi asosida qisqa tahliliy hisobot tayyorlang.",
+     "- Dastur ma’lumotlar modeliga mos ER-diagramma chizing: jadvallar, maydonlar, birlamchi va tashqi kalitlarni ko‘rsating.",
+     "- SQLite hujjatlarini o‘rganib, tashqi kalitlardagi “SET NULL” va “CASCADE” qoidalarining farqi haqida referat yozing.",
+     "- Excel eksport faylidagi ma’lumotlar asosida elektron jadvalda ish turlari bo‘yicha qo‘shimcha diagramma tuzing va uni dastur jadvali bilan solishtiring.",
+     "- Dastur ishlatadigan hisob-kitob qoidalarini (qarz, faol holat, muddat o‘tishi, tushum) psevdokod yoki blok-sxema ko‘rinishida tavsiflang va ularni SQL so‘rovlari ko‘rinishida yozishga harakat qiling.",
+     "- Frilanser faoliyatida qanday qo‘shimcha ma’lumotlar (masalan, tuzatishlar soni yoki ish soatlari) foydali bo‘lishini tahlil qilib, ma’lumotlar modelini kengaytirish bo‘yicha taklif tayyorlang.",
+     "Mustaqil ish natijalari keyingi mashg‘ulotda qisqa taqdimot shaklida himoya qilinadi.",
+     "Mustaqil ish uchun materiallar tanlashda talabaning kelgusi mutaxassisligini hisobga olish tavsiya etiladi: dizayn yo‘nalishi talabalari asosan buyurtmalar oqimi va hisob-fakturaga, axborot texnologiyalari yo‘nalishi talabalari esa ma’lumotlar modeli va hisob-kitob qoidalariga e’tibor qaratadi. Himoya jarayonida talaba o‘z ishining amaliy qo‘llanish sohasini asoslab berishi kerak."
+    ]
+   },
+   {
+    "sarlavha": "Xavfsizlik va axborot madaniyati qoidalari",
+    "matn": [
+     "- O‘quv mashg‘ulotlarida haqiqiy mijozlarning telefon raqamlari va boshqa shaxsiy ma’lumotlaridan foydalanmang, faqat shartli ma’lumotlarni kiriting.",
+     "- Kasbiy faoliyatda mijozlarning shaxsiy ma’lumotlarini uchinchi shaxslarga bermang; Excel eksport fayllari va hisob-fakturalarni xavfsiz joyda saqlang.",
+     "- Baza faylidan muntazam zaxira nusxa oling va uni alohida qurilmada saqlang.",
+     "- Umumiy kompyuterlarda ishlaganda boshqa foydalanuvchining baza faylini ochmang va o‘zgartirmang, ishni tugatgach shaxsiy fayllarni o‘chiring.",
+     "- Dasturni faqat muallifning rasmiy GitHub sahifasidan yuklab oling.",
+     "- Uzoq vaqt kompyuterda ishlaganda har 45–50 daqiqada qisqa tanaffus qiling.",
+     "- Hisob-faktura va Excel hisobotlarni mijozga yuborishdan oldin ulardagi ma’lumotlar to‘g‘riligini tekshiring; noto‘g‘ri summa ko‘rsatilgan hujjat mijoz bilan munosabatlarga salbiy ta’sir qilishi mumkin.",
+     "- Dastur hisob-fakturasi soliq hisobi uchun rasmiy hujjat emasligini talabalarga tushuntiring; rasmiy hisobot talab etilganda amaldagi qonunchilikda belgilangan shakllardan foydalaniladi."
+    ]
+   }
+  ]
+ }
+}
