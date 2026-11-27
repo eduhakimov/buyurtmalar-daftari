@@ -90,11 +90,11 @@ def deadline_text(o) -> str:
         return shown
     n = (dd - date.today()).days
     if n < 0:
-        return f"{shown}  ·  {tr('overdue_days', n=-n)}"
+        return f"{shown} · {tr('overdue_days', n=-n)}"
     if n == 0:
-        return f"{shown}  ·  {tr('today')}"
+        return f"{shown} · {tr('today')}"
     if n <= 7:
-        return f"{shown}  ·  {tr('days_left', n=n)}"
+        return f"{shown} · {tr('days_left', n=n)}"
     return shown
 
 
@@ -194,10 +194,6 @@ class OrdersModel(QAbstractTableModel):
                 return QColor("#8a817b")
         if role == Qt.BackgroundRole and o["overdue"]:
             return QColor(220, 38, 38, 24)
-        if role == Qt.FontRole and c == "deadline" and o["overdue"]:
-            f = QFont()
-            f.setBold(True)
-            return f
         return None
 
 
@@ -495,6 +491,9 @@ class OrderEditor(QFrame):
         try:
             html = invoice_html(o, c, self.win.db.payments(self.oid), self.win.designer(), tr, type_name, accent())
             save_invoice_pdf(html, p)
+        except PermissionError:
+            error(self, tr("save_failed", p=p))
+            return
         except Exception as ex:
             from uzkit.app import log_exception
             log_exception(ex)
@@ -552,7 +551,7 @@ class OrdersView(QWidget):
         hh.setSectionResizeMode(QHeaderView.Interactive)
         hh.setSectionResizeMode(2, QHeaderView.Stretch)
         hh.setHighlightSections(False)
-        for col, w in ((0, 40), (1, 112), (3, 84), (4, 82), (5, 78), (6, 178), (7, 110)):
+        for col, w in ((0, 40), (1, 112), (3, 84), (4, 86), (5, 86), (6, 184), (7, 110)):
             self.table.setColumnWidth(col, w)
         self.table.setColumnHidden(0, True)
         self.table.setHorizontalScrollBarPolicy(Qt.ScrollBarAsNeeded)
@@ -976,11 +975,21 @@ class MainWindow(BaseMainWindow):
             self.db = D.DB(":memory:")
             D.fill_demo(self.db)
         else:
+            path = data_dir(appmod.META["slug"]) / "buyurtmalar.db"
             try:
-                self.db = D.DB(data_dir(appmod.META["slug"]) / "buyurtmalar.db")
+                self.db = D.DB(path)
             except Exception as ex:
-                error(None, tr("db_error", e=ex))
-                self.db = D.DB(":memory:")
+                # Buzilgan bazani zaxiraga olib, yangisini ochamiz (yangi yozuvlar yo'qolmasin)
+                backup = path.with_name(f"buyurtmalar.broken-{datetime.now():%Y%m%d-%H%M%S}.db")
+                try:
+                    if not any(k in str(ex) for k in ("not a database", "malformed")):
+                        raise ex          # masalan, band (locked) baza: faylga tegilmaydi
+                    path.replace(backup)
+                    self.db = D.DB(path)
+                    error(None, tr("db_reset", e=ex, p=backup))
+                except Exception as ex2:
+                    error(None, tr("db_error", e=ex2))
+                    self.db = D.DB(":memory:")
 
         root = QWidget()
         v = QVBoxLayout(root)
@@ -1081,7 +1090,8 @@ class MainWindow(BaseMainWindow):
         self.orders.status.setCurrentIndex(self.orders.status.findData("overdue"))
 
     def designer(self) -> str:
-        return self.settings.get("designer", AUTHOR) if self.settings else AUTHOR
+        name = self.settings.get("designer", AUTHOR) if self.settings else AUTHOR
+        return name if isinstance(name, str) and name.strip() else AUTHOR
 
     def _set_designer(self):
         name, ok = QInputDialog.getText(self, tr("designer_menu"), tr("designer_name"), text=self.designer())
@@ -1095,6 +1105,9 @@ class MainWindow(BaseMainWindow):
             return
         try:
             export_excel(self.db, p, tr, status_name, type_name)
+        except PermissionError:
+            error(self, tr("save_failed", p=p))
+            return
         except Exception as ex:
             from uzkit.app import log_exception
             log_exception(ex)

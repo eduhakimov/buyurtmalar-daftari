@@ -122,6 +122,13 @@ def save_invoice_pdf(html_text: str, path) -> Path:
     from PySide6.QtGui import QPageLayout, QPageSize, QTextDocument
     from PySide6.QtPrintSupport import QPrinter
 
+    # QPrinter yozolmasa jim qoladi: fayl yozish mumkinligini oldindan tekshiramiz
+    target = Path(path)
+    existed = target.exists()
+    with open(target, "ab"):
+        pass
+    if not existed:
+        target.unlink()
     printer = QPrinter(QPrinter.HighResolution)
     printer.setOutputFormat(QPrinter.PdfFormat)
     printer.setOutputFileName(str(path))

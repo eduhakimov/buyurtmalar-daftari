@@ -106,5 +106,11 @@ STRINGS = {
     "pay_amount_q": {"uz": "To'lov summasi (so'm):", "ru": "Сумма платежа (сум):", "en": "Payment amount (UZS):"},
     "db_error": {"uz": "Ma'lumotlar bazasini ochib bo'lmadi:\n{e}", "ru": "Не удалось открыть базу данных:\n{e}",
                  "en": "Could not open the database:\n{e}"},
+    "db_reset": {"uz": "Ma'lumotlar bazasi buzilgan ({e}). U zaxiraga olindi va yangi baza ochildi:\n{p}",
+                 "ru": "База данных повреждена ({e}). Она сохранена в резервную копию, создана новая база:\n{p}",
+                 "en": "The database is damaged ({e}). It was backed up and a new one was created:\n{p}"},
+    "save_failed": {"uz": "Faylni saqlab bo'lmadi. U boshqa dasturda ochiq yoki faqat o'qish uchun bo'lishi mumkin:\n{p}",
+                    "ru": "Не удалось сохранить файл. Возможно, он открыт в другой программе или только для чтения:\n{p}",
+                    "en": "Could not save the file. It may be open in another program or read-only:\n{p}"},
     "folder_missing": {"uz": "Papka topilmadi: {p}", "ru": "Папка не найдена: {p}", "en": "Folder not found: {p}"},
 }

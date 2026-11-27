@@ -61,8 +61,17 @@ def money(v) -> str:
 
 
 def parse_money(text: str) -> int:
+    """'1 500 000', '1.500.000', '1,500,000.50', '2,5' -> butun so'm."""
     t = "".join(ch for ch in str(text) if ch.isdigit() or ch in ",.-")
-    t = t.replace(",", ".")
+    seps = [i for i, ch in enumerate(t) if ch in ",."]
+    if seps:
+        last = seps[-1]
+        decimals = len(t) - last - 1
+        if len(seps) > 1 and len({t[i] for i in seps}) == 1:
+            last = -1                       # 1.500.000: hammasi minglik ajratgich
+        elif len(seps) == 1 and decimals == 3:
+            last = -1                       # 1.500 yoki 1,500: minglik
+        t = "".join(ch for i, ch in enumerate(t) if ch not in ",." or i == last).replace(",", ".")
     if not t or t in "-.":
         return 0
     try:
@@ -87,10 +96,14 @@ class DB:
     def __init__(self, path: str = ":memory:"):
         self.path = str(path)
         self.con = sqlite3.connect(self.path)
-        self.con.row_factory = sqlite3.Row
-        self.con.execute("PRAGMA foreign_keys = ON")
-        self.con.executescript(SCHEMA)
-        self.con.commit()
+        try:
+            self.con.row_factory = sqlite3.Row
+            self.con.execute("PRAGMA foreign_keys = ON")
+            self.con.executescript(SCHEMA)
+            self.con.commit()
+        except Exception:
+            self.con.close()          # fayl band bo'lib qolmasin (zaxiraga ko'chirish uchun)
+            raise
 
     def close(self):
         self.con.close()
